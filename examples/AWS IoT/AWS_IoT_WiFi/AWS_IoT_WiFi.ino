@@ -12,6 +12,11 @@
   The circuit:
   - Arduino MKR WiFi 1010 or MKR1000
 
+  The following tutorial on Arduino Project Hub can be used
+  to setup your AWS account and the MKR board:
+
+  https://create.arduino.cc/projecthub/132016/securely-connecting-an-arduino-mkr-wifi-1010-to-aws-iot-core-a9f365
+
   This example code is in the public domain.
 */
 
