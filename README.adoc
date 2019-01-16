@@ -1,0 +1,8 @@
+= Arduino Cloud Provider Examples =
+
+Examples of how to connect various Arduino boards to cloud providers.
+
+Related tutorials on Arduino Project Hub:
+
+* AWS:
+** https://create.arduino.cc/projecthub/132016/securely-connecting-an-arduino-mkr-wifi-1010-to-aws-iot-core-a9f365[Securely connecting an Arduino MKR WiFi 1010 to AWS IoT Core]
