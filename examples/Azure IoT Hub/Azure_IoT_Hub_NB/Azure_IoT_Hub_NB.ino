@@ -15,6 +15,11 @@
   - SIM card with a data plan
   - LiPo battery
 
+  The following tutorial on Arduino Project Hub can be used
+  to setup your Azure account and the MKR board:
+
+  https://create.arduino.cc/projecthub/Arduino_Genuino/securely-connecting-an-arduino-nb-1500-to-azure-iot-hub-af6470
+
   This example code is in the public domain.
 */
 

@@ -6,3 +6,5 @@ Related tutorials on Arduino Project Hub:
 
 * AWS:
 ** https://create.arduino.cc/projecthub/132016/securely-connecting-an-arduino-mkr-wifi-1010-to-aws-iot-core-a9f365[Securely connecting an Arduino MKR WiFi 1010 to AWS IoT Core]
+* Azure
+** https://create.arduino.cc/projecthub/Arduino_Genuino/securely-connecting-an-arduino-nb-1500-to-azure-iot-hub-af6470[Securely Connecting an Arduino NB 1500 to Azure IoT Hub]
