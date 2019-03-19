@@ -8,3 +8,5 @@ Related tutorials on Arduino Project Hub:
 ** https://create.arduino.cc/projecthub/132016/securely-connecting-an-arduino-mkr-wifi-1010-to-aws-iot-core-a9f365[Securely connecting an Arduino MKR WiFi 1010 to AWS IoT Core]
 * Azure
 ** https://create.arduino.cc/projecthub/Arduino_Genuino/securely-connecting-an-arduino-nb-1500-to-azure-iot-hub-af6470[Securely Connecting an Arduino NB 1500 to Azure IoT Hub]
+* Google Cloud
+** https://create.arduino.cc/projecthub/Arduino_Genuino/securely-connecting-an-arduino-mkr-gsm-1400-to-gcp-iot-core-b8b628[Securely Connecting an Arduino MKR GSM 1400 to GCP IoT Core]
