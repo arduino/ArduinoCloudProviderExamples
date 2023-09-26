@@ -20,10 +20,22 @@
   This example code is in the public domain.
 */
 
-#include <ArduinoBearSSL.h>
-#include <ArduinoECCX08.h>
+#include <Arduino_SecureElement.h>
 #include <ArduinoMqttClient.h>
-#include <WiFiNINA.h> // change to #include <WiFi101.h> for MKR1000
+#if defined(ARDUINO_SAMD_MKR1000)
+  #include <WiFi101.h>
+#elif defined(ARDUINO_SAMD_MKRWIFI1010) || defined(ARDUINO_SAMD_NANO_33_IOT)
+  #include <WiFiNINA.h>
+#elif defined(ARDUINO_PORTENTA_C33)
+  #include <WiFiC3.h>
+  #include <WiFiSSLClient.h>
+#else
+  #error "Board not supported"
+#endif
+
+#if defined(BOARD_HAS_ECCX08)
+  #include <ArduinoBearSSL.h>
+#endif
 
 #include "arduino_secrets.h"
 
@@ -33,8 +45,13 @@ const char pass[]        = SECRET_PASS;
 const char broker[]      = SECRET_BROKER;
 const char* certificate  = SECRET_CERTIFICATE;
 
+
+#if defined(BOARD_HAS_ECCX08)
 WiFiClient    wifiClient;            // Used for the TCP socket connection
 BearSSLClient sslClient(wifiClient); // Used for SSL/TLS connection, integrates with ECC508
+#else
+WiFiSSLClient sslClient;
+#endif
 MqttClient    mqttClient(sslClient);
 
 unsigned long lastMillis = 0;
@@ -43,14 +60,18 @@ void setup() {
   Serial.begin(115200);
   while (!Serial);
 
-  if (!ECCX08.begin()) {
-    Serial.println("No ECCX08 present!");
+  SecureElement secureElement;
+
+  if (!secureElement.begin()) {
+    Serial.println("No Secure Element present!");
     while (1);
   }
 
+#if defined(BOARD_HAS_ECCX08)
   // Set a callback to get the current time
   // used to validate the servers certificate
   ArduinoBearSSL.onGetTime(getTime);
+#endif
 
   // Set the ECCX08 slot to use for the private key
   // and the accompanying public certificate for it
