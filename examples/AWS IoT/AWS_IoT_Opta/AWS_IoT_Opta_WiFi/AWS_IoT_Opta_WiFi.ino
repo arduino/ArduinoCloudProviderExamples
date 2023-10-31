@@ -13,16 +13,6 @@ constexpr char broker[] { SECRET_BROKER };
 constexpr unsigned port { SECRET_PORT };
 const char* certificate { SECRET_CERTIFICATE };
 
-// Remove comment for using the Ethernet connection
-// #define USE_ETHERNET_CONNECTION
-
-#if defined(USE_ETHERNET_CONNECTION)
-#include <Ethernet.h>
-#include <EthernetUdp.h>
-EthernetConnectionHandler conMan;
-EthernetClient tcpClient;
-EthernetUDP NTPUdp;
-#else
 #include <WiFi.h>
 #include <WiFiUdp.h>
 // Enter your sensitive data in arduino_secrets.h
@@ -31,7 +21,6 @@ constexpr char pass[] { SECRET_PASS };
 WiFiConnectionHandler conMan(SECRET_SSID, SECRET_PASS);
 WiFiClient tcpClient;
 WiFiUDP NTPUdp;
-#endif
 
 NTPClient timeClient(NTPUdp);
 BearSSLClient sslClient(tcpClient);
@@ -141,10 +130,7 @@ void publishMessage()
     String msg = "Hello, World! ";
     msg += millis();
     payload["message"] = msg;
-
-#if !defined(USE_ETHERNET_CONNECTION)
     payload["rssi"] = WiFi.RSSI();
-#endif
 
     JSONVar message;
     message["ts"] = static_cast<unsigned long>(time(nullptr));
@@ -197,11 +183,8 @@ void onMessageReceived(int messageSize)
 void onNetworkConnect()
 {
     Serial.println(">>>> CONNECTED to network");
-#if defined(USE_ETHERNET_CONNECTION)
-    printEthernetStatus();
-#else
+
     printWifiStatus();
-#endif
     setNtpTime();
     connectMQTT();
 }
@@ -233,15 +216,5 @@ void printWifiStatus()
     Serial.println(WiFi.localIP());
     Serial.print("Local GW: ");
     Serial.println(WiFi.gatewayIP());
-    Serial.println();
-}
-
-void printEthernetStatus()
-{
-    // print your board's IP address:
-    Serial.print("Local IP: ");
-    Serial.println(Ethernet.localIP());
-    Serial.print("Local GW: ");
-    Serial.println(Ethernet.gatewayIP());
     Serial.println();
 }
